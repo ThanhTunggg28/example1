@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,8 +17,10 @@ public class Image {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column
-	private String category;
+	
+	@ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 	
 	@Column
 	private String title;
@@ -32,7 +36,7 @@ public class Image {
 		
 	}
 
-	public Image(long id, String category, String title, String description, String urlImage) {
+	public Image(long id, Category category, String title, String description, String urlImage) {
 		super();
 		this.id = id;
 		this.category = category;
@@ -49,11 +53,11 @@ public class Image {
 		this.id = id;
 	}
 
-	public String getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 

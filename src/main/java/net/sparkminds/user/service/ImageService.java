@@ -1,22 +1,18 @@
 package net.sparkminds.user.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 import net.sparkminds.user.dto.ImageRequestDto;
 import net.sparkminds.user.entity.Image;
 
-@Service
-public class ImageService {
+public interface ImageService {
+	
+	Image createImage(ImageRequestDto imageRequestDto);
+	
+	List<Image> getAllImage();
+	
+	void updateImage(ImageRequestDto imageRequestDto, Long id);
+	
+	void deleteImage(Long id);
 
-	public static ImageRequestDto showInfor(Image image) {
-
-		ImageRequestDto imageRequsetDto = new ImageRequestDto();
-		imageRequsetDto.setCategory(image.getCategory());
-		imageRequsetDto.setTitle(image.getTitle());
-		imageRequsetDto.setDescription(image.getDescription());
-		imageRequsetDto.setUrlImage(image.getUrlImage());
-
-		return imageRequsetDto;
-
-	}
 }
