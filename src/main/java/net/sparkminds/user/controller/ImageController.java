@@ -17,7 +17,7 @@ import net.sparkminds.user.entity.Image;
 import net.sparkminds.user.service.ImageService;
 
 @RestController
-@RequestMapping("/api/image")
+@RequestMapping("/api/images")
 public class ImageController {
 
 	

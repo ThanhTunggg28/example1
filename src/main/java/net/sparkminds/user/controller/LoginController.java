@@ -5,25 +5,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.sparkminds.user.common.APIResponse;
 import net.sparkminds.user.dto.LoginRequestDto;
 import net.sparkminds.user.service.LoginService;
 
 @RestController
+@RequestMapping("/api/login")
 public class LoginController {
 
 	@Autowired
-	private LoginService loginService;
+	private final LoginService loginService;
+	
+	public LoginController(LoginService loginService) {
+		this.loginService = loginService;
+	}
 
-	@PostMapping(value="/login")
-	public ResponseEntity<APIResponse> Login(@RequestBody LoginRequestDto loginRequestDto) {
+	@PostMapping
+	public ResponseEntity<?> Login(@RequestBody LoginRequestDto loginRequestDto) {
 		
-		APIResponse apiResponse = loginService.login(loginRequestDto);
+		loginService.login(loginRequestDto);
 		
-		return ResponseEntity
-				.status(apiResponse.getStatus())
-				.body(apiResponse);
+		return ResponseEntity.noContent().build();
 	}
 }
